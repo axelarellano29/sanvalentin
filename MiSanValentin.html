@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi San Valentín</title>
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to bottom, #ff9a9e, #fecfef);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+        #message {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 20px;
+            padding: 12px 24px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        #yesButton {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        #yesButton:hover {
+            background-color: #ff1e50;
+        }
+        #noButton {
+            background-color: #444;
+            color: white;
+            position: absolute;
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        .images-container {
+            display: none;
+            margin-top: 30px;
+        }
+        .images-container img {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            border-radius: 8px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* Fuegos artificiales */
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: fireworkAnimation 1s ease-out forwards;
+        }
+        @keyframes fireworkAnimation {
+            0% { transform: scale(1) translate(0, 0); opacity: 1; }
+            100% { transform: scale(3) translate(var(--x), var(--y)); opacity: 0; }
+        }
+
+        /* Frase romántica */
+        .romantic-text {
+            display: none;
+            font-size: 24px;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        /* Mensaje final */
+        .final-message {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Mensaje de "No" */
+        #noMessage {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-top: 20px;
+        }
+
+        /* Contador */
+        #countdown {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-top: 30px;
+        }
+
+        /* Mensaje de respuesta "Sabía que dirías que sí ❤️🤣🤣🤣" */
+        #responseMessage {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 50px;
+            color: #ff4d6d;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">¿Quieres ser mi 14 de febrero? ❤️</div>
+    <div class="button-container">
+        <button id="yesButton">Sí</button>
+        <button id="noButton">No</button>
+    </div>
+    
+    <!-- Contenedor de imágenes -->
+    <div class="images-container" id="imagesContainer">
+        <img src="IMAGEN1.jpg" alt="IMAGEN1">
+        <img src="IMAGEN2.jpg" alt="IMAGEN2">
+        <img src="IMAGEN3.jpg" alt="IMAGEN3">
+        <img src="IMAGEN4.gif" alt="IMAGEN4">
+    </div>
+
+    <!-- Frase romántica -->
+    <div class="romantic-text" id="romanticText">
+        "Eres mi todo, lo que nunca supe que necesitaba, y lo que ahora no puedo vivir sin."
+    </div>
+
+    <!-- Mensaje final -->
+    <div class="final-message" id="finalMessage">
+        Te amo Alondra ❤️
+    </div>
+
+    <!-- Mensaje de "No" -->
+    <div id="noMessage" style="display: none;">
+        OPLIME EL SI🙃​
+    </div>
+
+    <!-- Contador de 5 segundos -->
+    <div id="countdown" style="display: none;">5</div>
+
+    <!-- Mensaje de respuesta "Sabía que dirías que sí ❤️🤣🤣🤣" -->
+    <div id="responseMessage">Sabía que dirías que sí ❤️🤣🤣🤣</div>
+
+    <script>
+        document.getElementById("yesButton").addEventListener("click", function() {
+            // Ocultar el mensaje de "Sí" y "No"
+            document.getElementById("message").style.display = "none";
+            document.getElementById("noMessage").style.display = "none"; // Ocultar el mensaje de "OPLIME EL SI"
+            
+            // Mostrar el mensaje "Sabía que dirías que sí ❤️🤣🤣🤣"
+            document.getElementById("responseMessage").style.display = "block"; // Mostrar mensaje
+
+            // Después de 3 segundos, esconder el mensaje y comenzar el conteo
+            setTimeout(function() {
+                document.getElementById("responseMessage").style.display = "none"; // Ocultar el mensaje después de 3 segundos
+                startCountdown(); // Iniciar el contador después de ocultar el mensaje
+            }, 3000); // Mostrar el mensaje por 3 segundos
+        });
+
+        function startCountdown() {
+            let counter = 5;
+            document.getElementById("countdown").style.display = "block"; // Mostrar el contador
+            let countdownInterval = setInterval(function() {
+                counter--;
+                document.getElementById("countdown").innerText = counter;
+                if (counter === 0) {
+                    clearInterval(countdownInterval); // Detener el contador
+                    document.getElementById("countdown").style.display = "none"; // Ocultar contador
+                    document.getElementById("imagesContainer").style.display = "block"; // Mostrar imágenes
+                    document.getElementById("romanticText").style.display = "block"; // Mostrar frase romántica
+                    document.getElementById("finalMessage").style.display = "block"; // Mostrar mensaje final
+                }
+            }, 1000); // Disminuye el contador cada segundo
+        }
+
+        document.getElementById("noButton").addEventListener("click", function() {
+            document.getElementById("noMessage").style.display = "block"; // Muestra el mensaje de "OPLIME EL SI🙃​"
+        });
+
+        // Función para crear corazones
+        function createHearts() {
+            setInterval(() => {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart");
+                document.body.appendChild(heart);
+
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+
+                setTimeout(() => { heart.remove(); }, 3000);
+            }, 1000); // Crea un corazón cada segundo
+        }
+
+        // Función para crear fuegos artificiales
+        function createFireworks() {
+            setInterval(() => {
+                for (let i = 0; i < 5; i++) { // Crea 5 fuegos artificiales por intervalo
+                    let firework = document.createElement("div");
+                    firework.classList.add("firework");
+                    firework.style.left = `${Math.random() * window.innerWidth}px`;
+                    firework.style.top = `${Math.random() * window.innerHeight}px`;
+                    firework.style.setProperty('--x', Math.random() * 200 - 100 + 'px');
+                    firework.style.setProperty('--y', Math.random() * 200 - 100 + 'px');
+                    document.body.appendChild(firework);
+
+                    setTimeout(() => { firework.remove(); }, 1000);
+                }
+            }, 1000); // Crea fuegos artificiales cada segundo
+        }
+
+        // Llamamos a las funciones para crear corazones y fuegos artificiales continuamente
+        createHearts();
+        createFireworks();
+    </script>
+</body>
+</html>
